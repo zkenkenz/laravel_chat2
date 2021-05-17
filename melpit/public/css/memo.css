@@ -1,0 +1,32 @@
+.title{
+    text-align:center;
+    font-size:17px;
+}
+
+.message{
+    text-align: center;
+}
+
+.wrapperTwo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrapperTwo tr{
+    text-align: center;
+}
+
+#content {
+    width: 100%;
+    table-layout: fixed;
+}
+.tdata {
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.textarea {
+    white-space: pre-wrap;
+}
