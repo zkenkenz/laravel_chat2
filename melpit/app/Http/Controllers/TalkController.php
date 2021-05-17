@@ -101,7 +101,6 @@ class TalkController extends Controller
         } else {
             return redirect('selection');
         }
-
        
     }
 }

@@ -49,6 +49,11 @@ class DirectMessageController extends Controller
 
     public function message(Request $request)
     {
+        /**
+         * 
+         * メッセージ送信処理
+         */
+        
         $auth = Auth::user();
 
         $user_id = $request->directId;
