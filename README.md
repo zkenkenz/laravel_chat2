@@ -34,3 +34,15 @@
 - Laravel 7.30.4
 - MySQL 8.0.23
 - Docker/Docker-compose
+## ローカル環境での動作確認方法
+1. git clone https://github.com/zkenkenz/laravel_chat2.git
+1. cd laradock
+    1. cp env-example .env
+    2. docker-compose up -d php-fpm nginx mysql phpmyadmin workspace
+    3. docker-compose exec workspace bash
+    4. composer install
+    5. php artisan storage:link
+1. cd melpit 
+    1. cp .env.example .env
+    2. php artisan key:generate
+1. 動作確認　http://localhost/
