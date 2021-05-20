@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\information;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -31,8 +30,9 @@ class HomeController extends Controller
         $auth = Auth::user();
 
         $id = Auth::id();
+        if(Information::where('user_id',$id)->exists()){
         $informations = Information::where('user_id', $id)->first();
-        
+        }
         if(isset($informations)){
         $value = explode(",", $informations->language);
         return view('home', compact('auth','informations','value'));
