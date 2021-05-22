@@ -37,6 +37,9 @@ http://18.181.136.195
 - MySQL 8.0.23
 - Docker/Docker-compose
 - AWS(EC2,S3)
+## インフラ構成図
+<img width="715" alt="スクリーンショット 2021-05-22 15 07 14" src="https://user-images.githubusercontent.com/76867234/119216591-7a8e9400-bb0f-11eb-8f9c-fe1dac3cdf33.png">
+
 ## 設計書
 https://docs.google.com/spreadsheets/d/1uefRjptR_vnOvrtEsCRGRicU7ncljS-qMpQGg38R348/edit?usp=sharing
 ## ローカル環境での動作確認方法
