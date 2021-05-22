@@ -32,7 +32,7 @@
                                     @if($user->user_id == $result->user_id)
                                     <form action="privateRoom" method="get">
                                         @csrf
-                                        <input type="image" src="storage/image/{{ $user->image }}" alt="プロフィール画像">
+                                        <input type="image" src="{{ $user->image }}" alt="プロフィール画像">
                                         <input type="hidden" value="{{ $result->user_id }}" name="directId">
                                     </form>
                                     @endif
@@ -49,7 +49,7 @@
                                     {{ $result->user_name }}<br>
                                     @foreach($users as $user)
                                     @if($user->user_id == $result->user_id)
-                                    <img src="storage/image/{{ $user->image }}" alt="プロフィール画像">
+                                    <img src="{{ $user->image }}" alt="プロフィール画像">
                                     @endif
                                     @endforeach
                                 </div>
@@ -74,7 +74,7 @@
                                     @foreach($users as $user)
                                     @if($user->user_id == $message->user_id)
                                     {{ $user->nickName }}<br>
-                                    <img src="storage/image/{{ $user->image }}" alt="プロフィール画像">
+                                    <img src="{{ $user->image }}" alt="プロフィール画像">
                                     @endif
                                     @endforeach
                                 </div>
@@ -93,7 +93,7 @@
                                     @foreach($users as $user)
                                     @if($user->user_id == $auth->id)
                                     {{ $user->nickName }}<br>
-                                    <img src="storage/image/{{ $user->image }}" alt="プロフィール画像">
+                                    <img src="{{ $user->image }}" alt="プロフィール画像">
                                     @endif
                                     @endforeach
                                 </div>

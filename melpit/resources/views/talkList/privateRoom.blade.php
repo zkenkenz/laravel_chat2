@@ -31,7 +31,7 @@
 
                                 <div class="name">
                                     {{ $dmUser->nickName }}<br>
-                                    <img src="storage/image/{{ $dmUser->image }}" alt="プロフィール画像">
+                                    <img src="{{ $dmUser->image }}" alt="プロフィール画像">
 
                                 </div>
                                 <div class="txt">
@@ -44,7 +44,7 @@
 
                                 <div class="name">
                                     {{ $login->nickName }}<br>
-                                    <img src="storage/image/{{ $login->image }}" alt="プロフィール画像">
+                                    <img src="{{ $login->image }}" alt="プロフィール画像">
                                 </div>
 
                                 <div class="txt">

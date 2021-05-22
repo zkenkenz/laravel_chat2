@@ -38,7 +38,7 @@
                                     @if($user->user_id == $message->user_id)
                                     <form action="privateRoom" method="get">
                                         @csrf
-                                        <input type="image" src="storage/image/{{ $user->image }}" alt="プロフィール画像">
+                                        <input type="image" src="{{ $user->image }}" alt="プロフィール画像">
                                         <input type="hidden" value="{{ $user->user_id }}" name="directId">
                                     </form>
                                     @endif
@@ -55,7 +55,7 @@
                                     {{ $message->user_name }}<br>
                                     @foreach($users as $user)
                                     @if($user->user_id == $message->user_id)
-                                    <img src="storage/image/{{ $user->image }}" alt="プロフィール画像"><br>
+                                    <img src="{{ $user->image }}" alt="プロフィール画像"><br>
                                     @endif
                                     @endforeach
                                 </div>

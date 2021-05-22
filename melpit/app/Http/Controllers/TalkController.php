@@ -30,7 +30,7 @@ class TalkController extends Controller
 
         $auth = Auth::user();
         $language = $request->language;
-
+	$language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //追加
         //各トーク画面に関係あるメッセージを取得
         $userMessages = Message::where('language', $language)->orderBy('id', 'desc')->paginate(10);
 
@@ -54,8 +54,9 @@ class TalkController extends Controller
 
         $auth = Auth::user();
         $message = $request->input('Msg');
-        $language = $request->language;
-        $nickName = Information::where('user_id', $auth->id)->value('nickName');
+	$language = $request->language;
+	$language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //追加
+	$nickName = Information::where('user_id', $auth->id)->value('nickName');
 
         $userMessage = new Message;
         $userMessage->fill($request->all());

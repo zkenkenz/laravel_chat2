@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InformationRequest;
 use App\Models\Information;
-
+use Storage;
 
 class InformationController extends Controller
 {
@@ -41,25 +41,27 @@ class InformationController extends Controller
             $information->sex = $request->inlineRadioOptions;
             //アイコン登録時の条件分岐
             if(isset($request->image)) {
-                $information->image = $request->file('image')->store('public/image');
-                $information->image = str_replace('public/image/','',$information->image);
+		    $image = $request->file('image');//S3に変更
+		    $path = Storage::disk('s3')->putFile('/', $image, 'public');
+		    $information->image = Storage::disk('s3')->url($path);
             }else{
-                $information->image = "img.png";
+                $information->image = "https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/img.png";
             }
             //言語選択時の条件分岐
             if(isset($request['language'])) {
                 $collection = collect($request['language']); //collectで一度配列で取得する
                 $information->language = $collection->implode(','); //implodeで文字列連結して代入
             }else{
-                $information->language = "html_css";
+                $information->language = "https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/html_css";
             }
             $information->introduction = $request->introduction;
             $information->save();
         }else{
             if(isset($request->nickName, $request->introduction)) {
-                if(isset($request->image)) {
-                    $updateImg = $request->file('image')->store('public/image');
-                    $updateImg = str_replace('public/image/', '', $updateImg);
+		    if(isset($request->image)) {
+			 $image = $request->file('image');//S3に変更
+                   	 $path = Storage::disk('s3')->putFile('/', $image, 'public');
+                   	 $updateImg = Storage::disk('s3')->url($path);
                 } else {
                     $updateImg = $request->previousImg;
                 }

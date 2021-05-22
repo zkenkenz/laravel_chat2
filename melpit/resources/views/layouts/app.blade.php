@@ -24,7 +24,7 @@
     <title>yield('title','ポートフォリオ’)</title>
 </head>
 
-<body style="background: url('storage/image/brain-5870352_1920.jpg'); background-size: cover;background-color: rgba(255, 255, 255, 0.3); background-blend-mode: lighten;">
+<body style="background: url('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/brain-5870352_1920.jpg'); background-size: cover;background-color: rgba(255, 255, 255, 0.3); background-blend-mode: lighten;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

@@ -14,7 +14,7 @@
     <style>
         html,
         body {
-            background: url("storage/image/brain-5870352_1920.jpg");
+            background: url("https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/brain-5870352_1920.jpg");
             background-size: cover;
             background-color: rgba(255, 255, 255, 0.3);
             background-blend-mode: lighten;
@@ -89,8 +89,8 @@
             </div>
 
             <div class="links">
-                <a href="https://twitter.com/dntz1225"><img src="storage/image/twitter.png" class="image" style="width: 50px; height: 50px; border-radius: 30%;"></a>
-                <a href="https://github.com/zkenkenz/laravel_chat2"><img src="storage/image/github.png" class="image" style="width: 50px; height: 50px; border-radius: 10%;"></a>
+                <a href="https://twitter.com/dntz1225"><img src="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/twitter.png" class="image" style="width: 50px; height: 50px; border-radius: 30%;"></a>
+                <a href="https://github.com/zkenkenz/laravel_chat2"><img src="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/github.png" class="image" style="width: 50px; height: 50px; border-radius: 10%;"></a>
             </div>
 
             @if (Route::has('login'))

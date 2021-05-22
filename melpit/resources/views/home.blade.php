@@ -46,10 +46,10 @@
                             <label for="img" class="col-md-4 col-form-label text-md-right">アイコン</label>
                             <div class="col-md-6">
                                 @if(!isset($informations->image))
-                                <img src="storage/image/img.png" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
+                                <img src="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/img.png" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
                                 <input class="form-control form-control-sm" id="img" type="file" name="image">
-                                @else
-                                <img src="storage/image/{{ $informations->image }}" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
+				@else
+                                <img src="{{ $informations->image }}" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
                                 <input class="form-control form-control-sm" id="img" type="file" name="image">
                                 <input type="hidden" value="{{ $informations->image }}" name="previousImg">
                                 @endif
@@ -94,49 +94,49 @@
                             <div class="col-md-6">
                                 @if(!isset($informations))
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="html_css" id="html_css" checked>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/html_css" id="html_css" checked>
                                     <label class="form-check-label" for="html_css">
                                         HTML,CSS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="javaScript" id="javaScript">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/javaScript" id="javaScript">
                                     <label class="form-check-label" for="javaScript">
                                         JavaScript
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="java" id="java">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/java" id="java">
                                     <label class="form-check-label" for="java">
                                         Java
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="php" id="php">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/php" id="php">
                                     <label class="form-check-label" for="php">
                                         PHP
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="ruby" id="ruby">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/ruby" id="ruby">
                                     <label class="form-check-label" for="ruby">
                                         Ruby
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="c#" id="c1">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/c1" id="c1">
                                     <label class="form-check-label" for="c#">
                                         C#
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="python" id="python">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/python" id="python">
                                     <label class="form-check-label" for="python">
                                         Python
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="c++" id="c2">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/c2" id="c2">
                                     <label class="form-check-label" for="c++">
                                         C++
                                     </label>
@@ -144,49 +144,49 @@
                                 @else
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="html_css" id="html_css" <?php if (in_array('html_css', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/html_css" id="html_css" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/html_css', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="html_css">
                                         HTML,CSS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="javaScript" id="javaScript" <?php if (in_array('javaScript', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/javaScript" id="javaScript" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/javaScript', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="javaScript">
                                         JavaScript
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="java" id="java" <?php if (in_array('java', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/java" id="java" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/java', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="java">
                                         Java
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="php" id="php" <?php if (in_array('php', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/php" id="php" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/php', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="php">
                                         PHP
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="ruby" id="ruby" <?php if (in_array('ruby', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/ruby" id="ruby" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/ruby', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="ruby">
                                         Ruby
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="c1" id="c1" <?php if (in_array('c1', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/c1" id="c1" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/c1', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="c1">
                                         C#
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="python" id="python" <?php if (in_array('python', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/python" id="python" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/python', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="python">
                                         Python
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="c2" id="c2" <?php if (in_array('c2', $value)) echo "checked" ?>>
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/c2" id="c2" <?php if (in_array('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/c2', $value)) echo "checked" ?>>
                                     <label class="form-check-label" for="c2">
                                         C++
                                     </label>
