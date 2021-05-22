@@ -36,6 +36,7 @@ http://18.181.136.195
 - Laravel 7.30.4
 - MySQL 8.0.23
 - Docker/Docker-compose
+- AWS(EC2,S3)
 ## 設計書
 https://docs.google.com/spreadsheets/d/1uefRjptR_vnOvrtEsCRGRicU7ncljS-qMpQGg38R348/edit?usp=sharing
 ## ローカル環境での動作確認方法
