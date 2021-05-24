@@ -43,6 +43,10 @@
             font-size: 40px;
             font-weight: 600;
         }
+        .subTitle {
+            font-size: 20px;
+            font-weight: 600;
+        }
 
 
         .links>a {
@@ -82,10 +86,11 @@
     <div class="flex-center position-ref full-height">
 
         <div class="content">
-            <div class="title m-b-md">
-                未経験エンジニアによる<br>
-                未経験エンジニアのための<br>
-                チャット
+            <div class="title">
+                ララチャット
+            </div>
+            <div class="subTitle m-b-md">
+                〜未経験エンジニアによる未経験エンジニアのためのチャット〜
             </div>
 
             <div class="links">
