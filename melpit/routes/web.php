@@ -31,23 +31,15 @@ Route::get('selection', 'InformationController@selection');
 
 //トークルームが呼ばれた時のpostのルート
 Route::get('talk','TalkController@talk')->name('talkList.talk');
-
 //メッセージが送信されたときのルート
-Route::post('message', 'TalkController@message');
-Route::get('message', function () {
-   return redirect('selection');
-});
+Route::post('talk', 'TalkController@message');
 
 
 //DM画面へのルート
 Route::get('privateRoom', 'DirectMessageController@room');
-
-
 //DMが送られた時
-Route::post('directMsg', 'DirectMessageController@message');
-Route::get('directMsg', function () {
-   return redirect('selection');
-});
+Route::post('privateRoom', 'DirectMessageController@message');
+
 
 //検索が行われた時のルート
 Route::get('search', 'TalkController@search');

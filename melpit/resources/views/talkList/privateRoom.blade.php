@@ -20,43 +20,42 @@
                     {{$messages->appends(request()->input())->links()}}
                 </div>
                 <div class="card-body" style="background-color:lightcyan">
-                    <div class="messages">
-
-                        <p style='text-align:center;'>メッセージを送りましょう</p>
-
+                    <div class="messages"> <br>
                         <ul class="messages">
-                            @foreach($messages as $message)
-                            @if($message->destination === $auth->id)
-                            <li class="left-side">
+                            <section class="scroll_area" data-infinite-scroll='{
+                                "path": ".pagination a[rel=next]",
+                                "append": ".messages"
+                            }'>
+                                @foreach($messages as $message)
+                                @if($message->destination === $auth->id)
+                                <li class="left-side">
 
-                                <div class="name">
-                                    {{ $dmUser->nickName }}<br>
-                                    <img src="{{ $dmUser->image }}" alt="プロフィール画像">
+                                    <div class="name">
+                                        {{ $dmUser->nickName }}<br>
+                                        <img src="{{ $dmUser->image }}" alt="プロフィール画像">
 
-                                </div>
-                                <div class="txt">
-                                    {!! nl2br(e($message->message)) !!}<br>
-                                    <span>{{ $message->created_at->format('m/d H:i') }}</span>
-                                </div>
-                            </li>
-                            @else
-                            <li class="right-side">
+                                    </div>
+                                    <div class="txt">
+                                        {!! nl2br(e($message->message)) !!}<br>
+                                        <span>{{ $message->created_at->format('m/d H:i') }}</span>
+                                    </div>
+                                </li>
+                                @else
+                                <li class="right-side">
 
-                                <div class="name">
-                                    {{ $login->nickName }}<br>
-                                    <img src="{{ $login->image }}" alt="プロフィール画像">
-                                </div>
+                                    <div class="name">
+                                        {{ $login->nickName }}<br>
+                                        <img src="{{ $login->image }}" alt="プロフィール画像">
+                                    </div>
 
-                                <div class="txt">
-                                    {!! nl2br(e($message->message)) !!}<br>
-                                    <span>{{ $message->created_at->format('m/d H:i') }}</span>
-                                </div>
-                            </li>
-                            @endif
-                            @endforeach
-
-
-
+                                    <div class="txt">
+                                        {!! nl2br(e($message->message)) !!}<br>
+                                        <span>{{ $message->created_at->format('m/d H:i') }}</span>
+                                    </div>
+                                </li>
+                                @endif
+                                @endforeach
+                            </section>
                         </ul>
                     </div>
                 </div>
@@ -68,7 +67,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body" style="background-color:lightcyan">
-                    <form action="directMsg" method="post">
+                    <form action="privateRoom" method="post">
                         @csrf
                         <div class="input-group">
                             <textarea class="form-control @error('Msg') is-invalid @enderror" name="Msg" placeholder="message" required autocomplete="Msg">{{ old('Msg') }}</textarea>
@@ -87,4 +86,13 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    var infScroll = new InfiniteScroll('.scroll_area', {
+        path: ".pagination a[rel=next]",
+        append: ".messages"
+    });
+</script>
 @endsection

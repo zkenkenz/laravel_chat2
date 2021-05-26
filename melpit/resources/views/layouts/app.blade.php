@@ -12,7 +12,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -24,7 +26,7 @@
     <title>yield('title','ポートフォリオ’)</title>
 </head>
 
-<body style="background: url('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/brain-5870352_1920.jpg'); background-size: cover;background-color: rgba(255, 255, 255, 0.3); background-blend-mode: lighten;">
+<body style="background: url('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/brain-5870352_1920.jpg'); background-size: 100%;background-color: rgba(255, 255, 255, 0.3); background-blend-mode: lighten;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -111,7 +113,7 @@
             @yield('content')
         </main>
     </div>
-   
+    @yield('script')
 </body>
 
 </html>

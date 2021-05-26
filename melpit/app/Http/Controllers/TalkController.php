@@ -32,7 +32,7 @@ class TalkController extends Controller
         $language = $request->language;
 	$language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //追加
         //各トーク画面に関係あるメッセージを取得
-        $userMessages = Message::where('language', $language)->orderBy('id', 'desc')->paginate(10);
+        $userMessages = Message::where('language', $language)->paginate(10);
 
         //トークしているユーザーのIDとアイコンを取得
         $users = Information::select('user_id', 'image')->get();
@@ -68,7 +68,7 @@ class TalkController extends Controller
         $request->session()->regenerateToken();
 
         //各トーク画面に関係あるメッセージを取得
-        $userMessages = Message::where('language', $language)->orderBy('id', 'desc')->paginate(10);
+        $userMessages = Message::where('language', $language)->paginate(10);
 
         //トークしているユーザーのIDとアイコンを取得
         $users = Information::select('user_id', 'image')->get();

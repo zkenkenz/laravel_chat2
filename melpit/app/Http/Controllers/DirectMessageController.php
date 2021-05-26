@@ -43,7 +43,7 @@ class DirectMessageController extends Controller
             ->orwhere(function ($query) use ($user_id, $auth) {
                 $query->where('user_id', $user_id)->where('destination', $auth->id);
             })
-            ->orderBy('id', 'desc')->paginate(10);
+            ->paginate(10);
         return view('talkList.privateRoom', compact('dmUser', 'login', 'user_id', 'auth', 'messages'));
     }
 
@@ -79,7 +79,7 @@ class DirectMessageController extends Controller
             ->orwhere(function ($query) use ($user_id, $auth) {
                 $query->where('user_id', $user_id)->where('destination', $auth->id);
             })
-            ->orderBy('id', 'desc')->paginate(10);
+            ->paginate(10);
 
         return view('talkList.privateRoom', compact('dmUser', 'login', 'user_id', 'auth', 'messages'));
     }

@@ -27,57 +27,61 @@
                     {{$userMessages->appends(request()->input())->links()}}
                 </div>
                 <div class="card-body">
-                    <div class="messages">
-                        <ul class="messages">
-                            @foreach($userMessages as $message)
-                            @if($auth->id != $message->user_id)
-                            <li class="left-side">
-                                <div class="name">
-                                    {{ $message->user_name }}<br>
-                                    @foreach($users as $user)
-                                    @if($user->user_id == $message->user_id)
-                                    <form action="privateRoom" method="get">
-                                        @csrf
-                                        <input type="image" src="{{ $user->image }}" alt="プロフィール画像">
-                                        <input type="hidden" value="{{ $user->user_id }}" name="directId">
-                                    </form>
-                                    @endif
-                                    @endforeach
-                                </div>
-                                <div class="txt">
-                                    {!! nl2br(e($message->message)) !!}<br>
-                                    <span>{{ $message->created_at->format('m/d H:i') }}</span>
-                                </div>
-                            </li>
-                            @else
-                            <li class="right-side">
-                                <div class="name">
-                                    {{ $message->user_name }}<br>
-                                    @foreach($users as $user)
-                                    @if($user->user_id == $message->user_id)
-                                    <img src="{{ $user->image }}" alt="プロフィール画像"><br>
-                                    @endif
-                                    @endforeach
-                                </div>
-                                <div class="txt">
-                                    {!! nl2br(e($message->message)) !!}<br>
-                                    <span>{{ $message->created_at->format('m/d H:i') }}</span>
-                                </div>
-                            </li>
-                            @endif
-                            @endforeach
+                    <div class="comment">
+                        <ul class="messages"><br>
+                            <section class="scroll_area" data-infinite-scroll='{
+                                "path": ".pagination a[rel=next]",
+                                "append": ".messages"
+                            }'>
+                                @foreach($userMessages as $message)
+                                @if($auth->id != $message->user_id)
+                                <li class="left-side">
+                                    <div class="name">
+                                        {{ $message->user_name }}<br>
+                                        @foreach($users as $user)
+                                        @if($user->user_id == $message->user_id)
+                                        <form action="privateRoom" method="get">
+                                            @csrf
+                                            <input type="image" src="{{ $user->image }}" alt="プロフィール画像">
+                                            <input type="hidden" value="{{ $user->user_id }}" name="directId">
+                                        </form>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="txt">
+                                        {!! nl2br(e($message->message)) !!}<br>
+                                        <span>{{ $message->created_at->format('m/d H:i') }}</span>
+                                    </div>
+                                </li>
+                                @else
+                                <li class="right-side">
+                                    <div class="name">
+                                        {{ $message->user_name }}<br>
+                                        @foreach($users as $user)
+                                        @if($user->user_id == $message->user_id)
+                                        <img src="{{ $user->image }}" alt="プロフィール画像"><br>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="txt">
+                                        {!! nl2br(e($message->message)) !!}<br>
+                                        <span>{{ $message->created_at->format('m/d H:i') }}</span>
+                                    </div>
+                                </li>
+                                @endif
+                                @endforeach
+                            </section>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="message" method="post">
+                    <form action="talk" method="post">
                         @csrf
                         <div class="input-group">
                             <textarea class="form-control @error('Msg') is-invalid @enderror" name="Msg" placeholder="message" required autocomplete="Msg">{{ old('Msg') }}</textarea>
@@ -97,4 +101,13 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    var infScroll = new InfiniteScroll('.scroll_area', {
+        path: ".pagination a[rel=next]",
+        append: ".messages"
+    });
+</script>
 @endsection
