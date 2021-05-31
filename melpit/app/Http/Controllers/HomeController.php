@@ -30,9 +30,11 @@ class HomeController extends Controller
         $auth = Auth::user();
 
         $id = Auth::id();
+        //プロフィールに何にか入っていたら
         if(Information::where('user_id',$id)->exists()){
         $informations = Information::where('user_id', $id)->first();
         }
+        //プロフィールが入力されていれば
         if(isset($informations)){
         $value = explode(",", $informations->language);
         return view('home', compact('auth','informations','value'));

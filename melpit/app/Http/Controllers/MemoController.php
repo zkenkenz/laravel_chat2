@@ -131,6 +131,8 @@ class MemoController extends Controller
          * 
          * メモ編集
          */
+       
+        //値アップデート
         $update = [
             'date' => $request->date,
             'title' => $request->title,
