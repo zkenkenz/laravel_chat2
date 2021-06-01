@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MemoRequest;
 use App\Models\Memo;
 use App\Models\Information;
-use Laravel\Ui\Presets\React;
+use App\Models\MemoImage;
+use Storage;
 
 class MemoController extends Controller
 {
@@ -30,9 +31,9 @@ class MemoController extends Controller
 
 
         $auth = Auth::user();
-        $memos = Memo::where('user_id',$auth->id)->orderBy('id', 'desc')->paginate(10);
+        $memos = Memo::where('user_id', $auth->id)->orderBy('id', 'desc')->paginate(10);
 
-        return view('home.memo', compact('auth','memos'));
+        return view('home.memo', compact('auth', 'memos'));
     }
 
     public function add(MemoRequest $request)
@@ -41,10 +42,25 @@ class MemoController extends Controller
          * 
          * メモor投稿された時の処理
          */
-        
+
         $memo = new Memo;
         $memo->fill($request->all());
         $memo->save();
+
+        //メモの画像をS3に追加
+        $memoImage = new MemoImage;
+        $id = Memo::select('id')->orderBy('created_at', 'desc')->first();
+        $memoImage->memo_id = $id['id'];
+
+        if (isset($request->image)) {
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('/', $image, 'public');
+            $memoImage->image = Storage::disk('s3')->url($path);
+        }else {
+            $memoImage->image = 'NULL';
+        }
+        $memoImage->save();
+
 
         //二重送信防止トークン
         $request->session()->regenerateToken();
@@ -61,19 +77,19 @@ class MemoController extends Controller
          */
 
         //memoの中から投稿のチェックが付いているものを取得
-        $list = Memo::where('serect',1)->orderBy('id', 'desc')->paginate(10);
+        $list = Memo::where('serect', 1)->orderBy('id', 'desc')->paginate(10);
 
         //検索結果で何か（keyが）送られてきたら
         $key = $request->key;
         if (isset($key)) {
-            $results = Memo::where('serect',1)
-            ->where(function ($query) use ($key) { 
-                $query->where('title','like','%'.$key.'%')->orwhere('content','like','%'.$key.'%');
-            })
+            $results = Memo::where('serect', 1)
+                ->where(function ($query) use ($key) {
+                    $query->where('title', 'like', '%' . $key . '%')->orwhere('content', 'like', '%' . $key . '%');
+                })
                 ->paginate(10);
-            return view('home.postList',compact('results'));
+            return view('home.postList', compact('results'));
         }
-        return view('home.postList',compact('list'));
+        return view('home.postList', compact('list'));
     }
 
     public function detail($id)
@@ -83,18 +99,18 @@ class MemoController extends Controller
          * メモ（投稿）の詳細画面
          */
         $auth = Auth::user();
-        $userMemo = Memo::where('id',$id)->first();
+        $userMemo = Memo::where('id', $id)->first();
         //ダイレクトに番号が打たれる時はリダイレクト
-        
+
         if ($userMemo->user_id != $auth->id && $userMemo->serect == 2) {
             return redirect('memo');
         }
         //投稿者のニックネームを取得
-        $nickName = Information::where('user_id',$userMemo->user_id)->select('nickName')->first();
+        $nickName = Information::where('user_id', $userMemo->user_id)->select('nickName')->first();
 
-        $detail = Memo::where('id',$id)->get();
+        $detail = Memo::where('id', $id)->get();
 
-        return view('home.detail',compact('detail','nickName','auth'));
+        return view('home.detail', compact('detail', 'nickName', 'auth'));
     }
 
     public function delete(Request $request)
@@ -103,7 +119,7 @@ class MemoController extends Controller
          * 
          * メモ削除
          */
-        Memo::where('id',$request->memoId)->delete();
+        Memo::where('id', $request->memoId)->delete();
 
         return redirect('memo');
     }
@@ -116,13 +132,13 @@ class MemoController extends Controller
          */
         $auth = Auth::user();
 
-        $memo = Memo::where('id',$request->memoId)->first();
+        $memo = Memo::where('id', $request->memoId)->first();
         //ダイレクトに番号が打たれる時はリダイレクト
         if ($memo->user_id != $auth->id) {
             return redirect('memo');
         }
 
-        return view('home.update',compact('memo'));
+        return view('home.update', compact('memo'));
     }
 
     public function update(MemoRequest $request)
@@ -131,7 +147,7 @@ class MemoController extends Controller
          * 
          * メモ編集
          */
-       
+
         //値アップデート
         $update = [
             'date' => $request->date,
@@ -140,7 +156,7 @@ class MemoController extends Controller
             'serect' => $request->serect
         ];
 
-        Memo::where('id',$request->memoId)->update($update);
+        Memo::where('id', $request->memoId)->update($update);
 
         return redirect('memo');
     }
