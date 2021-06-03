@@ -39,6 +39,15 @@
                                             </td>
                                         </tr>
                                     </table>
+                                    @if($image != 'NULL')
+                                    <table id="content">
+                                        <tr>
+                                            <td>
+                                            <img src="{{ $image }}" alt="プロフィール画像" style="width: 100%; height: auto; border:solid 1px rgb(229,229,229);">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    @endif
                                     <table id="content" style="background-color:darkgray; border:solid .5px rgb(214,214,214);">
                                         <tr>
                                             <td>

@@ -110,7 +110,12 @@ class MemoController extends Controller
 
         $detail = Memo::where('id', $id)->get();
 
-        return view('home.detail', compact('detail', 'nickName', 'auth'));
+        //関連するメモの画像を取得
+        $memoImage = MemoImage::where('memo_id',$id)->first();
+        $image = $memoImage['image'];
+        
+
+        return view('home.detail', compact('detail', 'nickName', 'auth','image'));
     }
 
     public function delete(Request $request)

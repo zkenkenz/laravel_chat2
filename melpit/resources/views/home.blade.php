@@ -48,7 +48,7 @@
                                 @if(!isset($informations->image))
                                 <img src="https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/img.png" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
                                 <input class="form-control form-control-sm" id="img" type="file" name="image">
-				@else
+				                @else
                                 <img src="{{ $informations->image }}" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
                                 <input class="form-control form-control-sm" id="img" type="file" name="image">
                                 <input type="hidden" value="{{ $informations->image }}" name="previousImg">
