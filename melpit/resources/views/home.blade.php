@@ -50,8 +50,13 @@
                                 <input class="form-control form-control-sm" id="img" type="file" name="image">
 				                @else
                                 <img src="{{ $informations->image }}" alt="プロフィール画像" style="width: 100px; height: 100px; border:solid 1px rgb(229,229,229)">
-                                <input class="form-control form-control-sm" id="img" type="file" name="image">
+                                <input class="form-control form-control-sm @error('image') is-invalid @enderror" id="img" type="file" name="image" >
                                 <input type="hidden" value="{{ $informations->image }}" name="previousImg">
+                                @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 @endif
                             </div>
                         </div>

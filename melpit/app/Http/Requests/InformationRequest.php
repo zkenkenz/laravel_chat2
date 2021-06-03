@@ -28,6 +28,7 @@ class InformationRequest extends FormRequest
             'nickName' => 'required|between:0,10',
             'inlineRadioOptions' => 'required',
             'introduction' => 'required|between:0,255',
+            'image' => 'max:1024',
         ];
     }
 
@@ -37,6 +38,7 @@ class InformationRequest extends FormRequest
             'required' => ':attribute は必須です。',
             'nickName.between' => ':attribute は :min 文字から :max 文字の間で入力してください。',
             'introduction.between' => ':attribute は :min 文字から :max 文字の間で入力してください。',
+            'max' => ':attribute は1MB未満にしてください。',
         ];
     }
 
@@ -46,6 +48,7 @@ class InformationRequest extends FormRequest
             'nickName' => 'ニックネーム',
             'inlineRadioOptions' => '性別',
             'introduction' => '自己紹介文',
+            'image' => 'アップロードファイル',
         ];
     }
 }

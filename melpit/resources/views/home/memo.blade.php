@@ -54,7 +54,12 @@
                                 <div class="form-group row">
                                     <label for="img" class="col-md-4 col-form-label text-md-right">画像</label>
                                     <div class="col-md-6">
-                                        <input class="form-control form-control-sm" id="img" type="file" name="image">
+                                        <input class="form-control form-control-sm @error('image') is-invalid @enderror" id="img" type="file" name="image">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
