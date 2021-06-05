@@ -43,7 +43,7 @@
                                     <table id="content">
                                         <tr>
                                             <td>
-                                            <img src="{{ $image }}" alt="プロフィール画像" style="width: 100%; height: auto; border:solid 1px rgb(229,229,229);">
+                                            <img src="{{ $image }}" alt="プロフィール画像" style="width: 50%; max-height:50hv; border:solid 1px rgb(229,229,229);">
                                             </td>
                                         </tr>
                                     </table>

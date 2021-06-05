@@ -138,12 +138,16 @@ class MemoController extends Controller
         $auth = Auth::user();
 
         $memo = Memo::where('id', $request->memoId)->first();
+
+        //関連するメモの画像を取得
+        $memoImage = MemoImage::where('memo_id',$request->memoId)->first();
+        $image = $memoImage['image'];
         //ダイレクトに番号が打たれる時はリダイレクト
         if ($memo->user_id != $auth->id) {
             return redirect('memo');
         }
 
-        return view('home.update', compact('memo'));
+        return view('home.update', compact('memo','image'));
     }
 
     public function update(MemoRequest $request)
@@ -153,7 +157,18 @@ class MemoController extends Controller
          * メモ編集
          */
 
-        //値アップデート
+        if(isset($request->image)){
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('/', $image, 'public');
+            $updateImg = Storage::disk('s3')->url($path);
+        }else{
+            $updateImg = $request->previousImg;//ファイルがなければ前の情報をもってくる
+        }
+        
+        //メモの画像アップデートする処理
+        MemoImage::where('memo_id',$request->memoId)->update(['image' => $updateImg]);
+
+        //その他の値をアップデート
         $update = [
             'date' => $request->date,
             'title' => $request->title,
