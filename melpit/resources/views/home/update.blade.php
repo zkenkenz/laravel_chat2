@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <div class="wrapper" style="padding: 0 50px;">
-                        <form method="post" action="update">
+                        <form method="post" action="update" enctype="multipart/form-data">
                             @csrf
                             <table class="table table-bordered">
 
@@ -51,6 +51,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="img" class="col-md-4 col-form-label text-md-right">画像</label>
+                                    <div class="col-md-6">
+                                        @if($image != 'NULL')
+                                        <img src="{{ $image }}" alt="プロフィール画像" style="width: 200px; height: 100px; border:solid 1px rgb(229,229,229);">
+                                        @endif
+                                        <input class="form-control form-control-sm @error('image') is-invalid @enderror" id="img" type="file" name="image">
+                                        <input type="hidden" name="previousImg" value="{{ $image }}">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="radio" style="margin:0 auto;">
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input" name="serect" id="inlineRadio1" value="1" <?php if ($memo->serect == 1) echo "checked" ?>>
@@ -72,7 +87,7 @@
                                     <div class="col-md-4 offset-md-8">
                                         <button type="button" class="btn btn-primary" onclick="submit();">
                                             編集する
-                                        <input type="hidden" value="{{ $memo->id }}" name="memoId">
+                                            <input type="hidden" value="{{ $memo->id }}" name="memoId">
                                         </button>
                                     </div>
                                 </div>

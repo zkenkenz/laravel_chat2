@@ -29,7 +29,8 @@ class MemoRequest extends FormRequest
             'date' => 'required',
             'title' => 'required|between:0,255',
             'content' => 'required|between:0,32767',
-            'serect' => 'required'
+            'serect' => 'required',
+            'image' => 'max:1024',
         ];
     }
 
@@ -39,6 +40,7 @@ class MemoRequest extends FormRequest
             'required' => ':attribute は必須です。',
             'title.between' => ':attribute は :min 文字から :max 文字の間で入力してください。',
             'content.between' => ':attribute は :min 文字から :max 文字の間で入力してください。',
+            'max' => ':attribute は1MB未満にしてください。',
         ];
     }
 
@@ -48,7 +50,8 @@ class MemoRequest extends FormRequest
             'date' => '日付',
             'title' => 'タイトル',
             'content' => '内容',
-            'serect' => '投稿の選択'
+            'serect' => '投稿の選択',
+            'image' => 'アップロードファイル',
         ];
     }
 
