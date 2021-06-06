@@ -32,11 +32,10 @@ class DirectMessageController extends Controller
 
         $user_id = $request->directId; //imgを押された時にそのuserのidを持ってくる
         //対象のuserを選択
-        $dmUser = Information::where('user_id', $user_id)->select('nickName', 'image')->first();
-
+        $dmUser = Information::whereUser($user_id)->first();
         $auth = Auth::user();
         //ログイン中のuserのプロフ情報を取得
-        $login = Information::where('user_id', $auth->id)->select('nickName', 'image')->first();
+        $login = Information::whereUser($auth->id)->first();
 
         //ログイン中のuserの対象のDMを取得
         $messages = DirectMessage::where('user_id', $auth->id)->where('destination', $user_id)
@@ -58,10 +57,10 @@ class DirectMessageController extends Controller
 
         $user_id = $request->directId;
         //対象のuserを選択
-        $dmUser = Information::where('user_id', $user_id)->select('nickName', 'image')->first();
+        $dmUser = Information::whereUser($user_id)->first();
 
         //ログイン中のuserのプロフ情報を取得
-        $login = Information::where('user_id', $auth->id)->select('nickName', 'image')->first();
+        $login = Information::whereUser($auth->id)->first();
 
         //DMが送られた時の処理
         if ($request->has('Msg')) {

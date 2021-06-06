@@ -19,4 +19,10 @@ class Message extends Model
         'language',
         'message'
     ];
+
+    //メッセージ取得ローカルスコープ
+    public function scopeWhereMessage($query, $language) {
+        return $query->where('language', $language);
+    }
+
 }

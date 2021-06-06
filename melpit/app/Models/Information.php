@@ -21,4 +21,9 @@ class Information extends Model
         'language',
         'introduction'
     ];
+
+    //対象のプロフ選択時のスコープ
+    public function scopeWhereUser($query, $user_id) {
+        return $query->where('user_id', $user_id)->select('nickName', 'image');
+    }
 }
