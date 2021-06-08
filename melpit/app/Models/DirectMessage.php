@@ -19,7 +19,7 @@ class DirectMessage extends Model
         'message'
     ];
 
-    //検索時のスコープ
+    //検索時,DM時のスコープ
     public function scopeWhereAuth($query, $auth_id) {
         return $query->where('user_id', $auth_id);
     }

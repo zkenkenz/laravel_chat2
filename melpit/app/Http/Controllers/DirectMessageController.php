@@ -38,9 +38,9 @@ class DirectMessageController extends Controller
         $login = Information::whereUser($auth->id)->first();
 
         //ログイン中のuserの対象のDMを取得
-        $messages = DirectMessage::where('user_id', $auth->id)->where('destination', $user_id)
+        $messages = DirectMessage::whereAuth($auth->id)->whereUser($user_id)
             ->orwhere(function ($query) use ($user_id, $auth) {
-                $query->where('user_id', $user_id)->where('destination', $auth->id);
+                $query->whereAuth($user_id)->whereUser($auth->id);
             })
             ->paginate(10);
         return view('talkList.privateRoom', compact('dmUser', 'login', 'user_id', 'auth', 'messages'));
@@ -74,9 +74,9 @@ class DirectMessageController extends Controller
         $request->session()->regenerateToken();
 
         //ログイン中のuserの対象のDMを取得
-        $messages = DirectMessage::where('user_id', $auth->id)->where('destination', $user_id)
+        $messages = DirectMessage::whereAuth($auth->id)->whereUser($user_id)
             ->orwhere(function ($query) use ($user_id, $auth) {
-                $query->where('user_id', $user_id)->where('destination', $auth->id);
+                $query->whereAuth($user_id)->whereUser($auth->id);
             })
             ->paginate(10);
 

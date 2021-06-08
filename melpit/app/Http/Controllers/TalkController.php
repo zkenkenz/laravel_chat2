@@ -56,7 +56,7 @@ class TalkController extends Controller
         $message = $request->input('Msg');
 	    $language = $request->language;
 	    $language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //言語の画像URLを追加
-	    $nickName = Information::where('user_id', $auth->id)->value('nickName');
+	    $nickName = Information::whereId($auth->id)->value('nickName');
 
         $userMessage = new Message;
         $userMessage->fill($request->all());
@@ -91,7 +91,7 @@ class TalkController extends Controller
         //検索結果で何か（keyが）送られてきたら
         if (isset($key1)) {
             //メッセージから曖昧検索
-            $results = Message::whereMessage($request->languages)->where('message', 'like', '%' . $key1 . '%')->get();
+            $results = Message::whereMessage($request->language)->where('message', 'like', '%' . $key1 . '%')->get();
             return view('talkList.search', compact('results', 'key1', 'key2', 'auth', 'users'));
         } elseif (isset($key2)) {
             $user_id = $request->directId;

@@ -22,8 +22,13 @@ class Information extends Model
         'introduction'
     ];
 
-    //対象のプロフ選択時のスコープ
+    //対象のユーザー選択時のスコープ
     public function scopeWhereUser($query, $user_id) {
         return $query->where('user_id', $user_id)->select('nickName', 'image');
+    }
+
+    //対象のプロフに関するスコープ
+    public function scopeWhereId($query,$id) {
+        return $query->where('user_id',$id);
     }
 }

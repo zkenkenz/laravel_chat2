@@ -31,7 +31,7 @@ class InformationController extends Controller
 
         //プロフィール登録
         $id = Auth::id();
-        $users = Information::where('user_id', $id)->first();
+        $users = Information::whereId($id)->first();
 
         //プロフィールの登録もしくはアップロード
         if(!isset($users)) {
@@ -73,11 +73,11 @@ class InformationController extends Controller
                     'introduction' => $request->introduction
                 ];
 
-                Information::where('user_id', $id)->update($update); //アップデート
+                Information::whereId($id)->update($update); //アップデート
             }
         }
         //ログイン者とプロフィールの結び付け
-        $informations = Information::where('user_id', $id)->first();
+        $informations = Information::whereId($id)->first();
 
         //二重送信防止トークン
         $request->session()->regenerateToken();
@@ -93,7 +93,7 @@ class InformationController extends Controller
          * 
          */
         $id = Auth::id();
-        $informations = Information::where('user_id', $id)->first();
+        $informations = Information::whereId($id)->first();
 
         //ログイン後の画面と、getでそのまま呼ばれた時の条件わけ
         if (isset($informations)) {
