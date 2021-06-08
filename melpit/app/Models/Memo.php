@@ -23,8 +23,8 @@ class Memo extends Model
         'serect'
     ];
 
-    //
-    public function scopeWhereId($query,$memoId){
+    //メモ選択時のスコープ
+    public function scopeWhereMemoId($query,$memoId){
         return $query->where('id',$memoId);
     }
 }

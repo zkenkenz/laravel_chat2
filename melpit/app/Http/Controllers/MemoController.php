@@ -99,7 +99,7 @@ class MemoController extends Controller
          * メモ（投稿）の詳細画面
          */
         $auth = Auth::user();
-        $userMemo = Memo::whereId($id)->first();
+        $userMemo = Memo::whereMemoId($id)->first();
         //ダイレクトに番号が打たれる時はリダイレクト
 
         if ($userMemo->user_id != $auth->id && $userMemo->serect == 2) {
@@ -108,7 +108,7 @@ class MemoController extends Controller
         //投稿者のニックネームを取得
         $nickName = Information::whereId($userMemo->user_id)->select('nickName')->first();
 
-        $detail = Memo::whereId($id)->get();
+        $detail = Memo::whereMemoId($id)->get();
 
         //関連するメモの画像を取得
         $memoImage = MemoImage::where('memo_id',$id)->first();
@@ -124,7 +124,7 @@ class MemoController extends Controller
          * 
          * メモ削除
          */
-        Memo::whereId($request->memoId)->delete();
+        Memo::whereMemoId($request->memoId)->delete();
 
         return redirect('memo');
     }
@@ -137,7 +137,7 @@ class MemoController extends Controller
          */
         $auth = Auth::user();
 
-        $memo = Memo::whereId($request->memoId)->first();
+        $memo = Memo::whereMemoId($request->memoId)->first();
 
         //関連するメモの画像を取得
         $memoImage = MemoImage::where('memo_id',$request->memoId)->first();
@@ -176,7 +176,7 @@ class MemoController extends Controller
             'serect' => $request->serect
         ];
 
-        Memo::whereId($request->memoId)->update($update);
+        Memo::whereMemoId($request->memoId)->update($update);
 
         return redirect('memo');
     }
