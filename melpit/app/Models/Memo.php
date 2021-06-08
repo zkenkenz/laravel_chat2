@@ -22,4 +22,9 @@ class Memo extends Model
         'content',
         'serect'
     ];
+
+    //
+    public function scopeWhereId($query,$memoId){
+        return $query->where('id',$memoId);
+    }
 }

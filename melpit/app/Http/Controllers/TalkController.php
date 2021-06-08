@@ -32,7 +32,7 @@ class TalkController extends Controller
         $language = $request->language;
 	    $language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //S3へ
         //各トーク画面に関係あるメッセージを取得
-        $userMessages = Message::where('language', $language)->paginate(10);
+        $userMessages = Message::whereMessage($language)->paginate(10);
 
         //トークしているユーザーのIDとアイコンを取得
         $users = Information::select('user_id', 'image')->get();
@@ -55,8 +55,8 @@ class TalkController extends Controller
         $auth = Auth::user();
         $message = $request->input('Msg');
 	    $language = $request->language;
-	    $language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //S3へ
-	    $nickName = Information::where('user_id', $auth->id)->value('nickName');
+	    $language = str_replace('https://laravel-chat2-bucket.s3-ap-northeast-1.amazonaws.com/', '', $language); //言語の画像URLを追加
+	    $nickName = Information::whereId($auth->id)->value('nickName');
 
         $userMessage = new Message;
         $userMessage->fill($request->all());
@@ -68,7 +68,7 @@ class TalkController extends Controller
         $request->session()->regenerateToken();
 
         //各トーク画面に関係あるメッセージを取得
-        $userMessages = Message::where('language', $language)->paginate(10);
+        $userMessages = Message::whereMessage($language)->paginate(10);
 
         //トークしているユーザーのIDとアイコンを取得
         $users = Information::select('user_id', 'image')->get();
@@ -91,13 +91,13 @@ class TalkController extends Controller
         //検索結果で何か（keyが）送られてきたら
         if (isset($key1)) {
             //メッセージから曖昧検索
-            $results = Message::where('language', $request->language)->where('message', 'like', '%' . $key1 . '%')->get();
+            $results = Message::whereMessage($request->language)->where('message', 'like', '%' . $key1 . '%')->get();
             return view('talkList.search', compact('results', 'key1', 'key2', 'auth', 'users'));
         } elseif (isset($key2)) {
             $user_id = $request->directId;
             //ログイン中のuserの対象のDMを取得
-            $rightMessage = DirectMessage::where('user_id', $auth->id)->where('destination', $user_id)->where('message', 'like', '%' . $key2 . '%')->get();
-            $leftMessage = DirectMessage::where('destination', $auth->id)->where('user_id', $user_id)->where('message', 'like', '%' . $key2 . '%')->get();
+            $rightMessage = DirectMessage::whereAuth($auth->id)->whereUser($user_id)->where('message', 'like', '%' . $key2 . '%')->get();
+            $leftMessage = DirectMessage::whereAuth($user_id)->whereUser($auth->id)->where('message', 'like', '%' . $key2 . '%')->get();
             return view('talkList.search', compact('key1', 'key2', 'auth', 'users', 'rightMessage', 'leftMessage'));
         } else {
             return redirect('selection');

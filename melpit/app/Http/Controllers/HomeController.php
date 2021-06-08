@@ -31,8 +31,8 @@ class HomeController extends Controller
 
         $id = Auth::id();
         //プロフィールに何にか入っていたら
-        if(Information::where('user_id',$id)->exists()){
-        $informations = Information::where('user_id', $id)->first();
+        if(Information::whereId($id)->exists()){
+        $informations = Information::whereId($id)->first();
         }
         //プロフィールが入力されていれば
         if(isset($informations)){
